@@ -1,33 +1,59 @@
-# Dockerizing-a-Spring-Boot-API
+# Build-Jenkins-Pipeline-with-Nexus
 
-Deploying Spring Boot Microservices on Docker
+Create a Jenkins Pipeline with Nexus Repository Manager
 
 ## Prerequisite
 
--[Install Docker](https://docs.docker.com/install/)
+-[Install Jenkins](https://jenkins.io/doc/book/installing/)
 
--[Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
+-[Install Nexus](https://help.sonatype.com/repomanager3/download)
 
-## Step 1
+## Step 1: Configure Java_home,GIT,Maven,Gradle for Jenkins
 
-1. Open [Spring Starter](https://start.spring.io) to create a Java Maven application with Web dependentcy.
+1. Goto Jenkins default running port localhost:8080.
 
-2. Import the project as an existing Maven project in your IDE.
+2. Under Manage Jenkins > Global Tool Configuration, put your path directory for Java_home,GIT,Maven,Gradle.
 
-3. Create a simple controller class to test your API.
+3. Under Manage Jenkins > Manage Plugin, install git, pipeline, nexus plugins.
 
-4. In pom.XML, define packaging as JAR.
+## Step 2: Configure Nexus
 
-5. Run command: mvn clean and mvn install to create jar file.
+1. Goto Nexus default running port localhost:8081.
 
-## Step 2
+2. Login with default user name: admin, password: admin123.
 
-1. Create Dockerfile in your working directory.
+## Step 3: Configure Maven Deploy to Nexus
 
-2. Run command: docker build -f DockerFile -t dockerdemo .
+1.  Configure Nexus for maven repository by adding following codes in your pom.xml.
 
-3. Run command: docker images to see if the dockerdemo image exists.
+    <distributionManagement>
 
-4. Run command: docker run -p 8082:8082 dockerdemo.
+        <snapshotRepository>
 
-The Spring Boot Application is running from the Docker container now.
+        	<id>nexus-snapshots</id>
+
+        	<url>http://localhost:8081/repository/maven-snapshots/</url>
+
+        </snapshotRepository>
+
+    </distributionManagement>
+
+2.  Configure Maven Settings with the credentials for Nexus by adding following codes in your setting.xml.
+
+<server>
+
+<id>nexus-snapshots</id>
+
+      <username>admin</username>
+
+      <password>Queens297</password>
+
+</server>
+
+## Step 4: Build Jenkins Pipeline project
+
+1. Goto Jenkins Home > New Item > Create Project with Pipeline.
+
+2. Goto Pipeline > Pipeline Script from SCM > Git > Repostory URL > Save
+
+3. Click Build Now.
