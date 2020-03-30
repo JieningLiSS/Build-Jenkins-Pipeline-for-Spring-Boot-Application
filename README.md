@@ -42,11 +42,11 @@ Create a Jenkins Pipeline with Nexus Repository Manager
 
 <server>
 
-<id>nexus-snapshots</id>
+    <id>nexus-snapshots</id>
 
-      <username>admin</username>
+        <username>admin</username>
 
-      <password>Queens297</password>
+        <password>Queens297</password>
 
 </server>
 
