@@ -26,17 +26,15 @@ Create a Jenkins Pipeline with Nexus Repository Manager
 
 1.  Configure Nexus for maven repository by adding following codes in your pom.xml.
 
-    <distributionManagement>
+```html
+<distributionManagement>
+  <snapshotRepository>
+    <id>nexus-snapshots</id>
 
-        <snapshotRepository>
-
-        	<id>nexus-snapshots</id>
-
-        	<url>http://localhost:8081/repository/maven-snapshots/</url>
-
-        </snapshotRepository>
-
-    </distributionManagement>
+    <url>http://localhost:8081/repository/maven-snapshots/</url>
+  </snapshotRepository>
+</distributionManagement>
+```
 
 2.  Configure Maven Settings with the credentials for Nexus by adding following codes in your setting.xml.
 
