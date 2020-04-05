@@ -41,7 +41,7 @@ Create a Jenkins Pipeline for Spring Boot Application with Nexus Repository Mana
 <server>
   <id>nexus-snapshots</id>
   <username>admin</username>
-  <password>password</password>
+  <password>admin123</password>
 </server>
 ```
 
